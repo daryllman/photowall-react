@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Title from './Title.jsx'
 import PhotoWall from './PhotoWall'
 import AddPhoto from './AddPhoto'
+import {Route} from 'react-router-dom'
 
 
 
@@ -30,7 +31,6 @@ class Main extends Component{
         //properly binding context to removePhoto() function
         //so that context is correct
         this.removePhoto = this.removePhoto.bind(this)
-        this.navigate = this.navigate.bind(this)
         console.log('constructor')
     }
 
@@ -42,11 +42,6 @@ class Main extends Component{
         }))
     }
 
-    navigate(){
-        this.setState({
-            screen: 'addPhoto'
-        })
-    }
 
     /*
     //componentDidMount() gets called after render() is done
@@ -62,27 +57,21 @@ class Main extends Component{
 
     render(){
         return <div>
-            {
-                this.state.screen ==='photos' && (
-            <div>
-                <Title title = {'PhotoWall'}/>
-                <PhotoWall posts={this.state.posts} onRemovePhoto={this.removePhoto} onNavigate={this.navigate}/>
-            </div>
-                )
-            }
+            <Route exact path="/" render={()=>(
+                        <div>
+                            <Title title = {'PhotoWall'}/>
+                            <PhotoWall posts={this.state.posts} onRemovePhoto={this.removePhoto} onNavigate={this.navigate}/>
+                        </div>
+            )}/>
 
-            {
-                this.state.screen ==='addPhoto' && (
-            <div>
-                <AddPhoto/>
-            </div>
-                )
-            }
+            <Route path="/AddPhoto" component={AddPhoto}/>
 
-
-            </div>
+        </div>
     }
 }
 
+// For Routing:
+// Note if you only have one component to render, use the component attribute.
+// If not can use the render attribute
 
 export default Main
