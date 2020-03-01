@@ -7,7 +7,17 @@ class AddPhoto extends Component{
     }
 
     handleSubmit(event){
-        event.preventDefault()
+        event.preventDefault(); //Prevent the default behaviour of wanting to refresh page upon button click
+        const imageLink = event.target.linkVal.value
+        const imageDescription = event.target.descriptionVal.value
+        const post = {
+            id: Number(new Date()),
+            description: imageDescription,
+            imageLink: imageLink
+        }
+        if (imageLink && imageDescription){
+            this.props.onAddPhoto(post)
+        }
     }
 
 
@@ -17,8 +27,8 @@ class AddPhoto extends Component{
                 <h1>Photowall</h1>
                 <div className="form">
                     <form onSubmit={this.handleSubmit}>
-                        <input type="text" placeholder="Link" />
-                        <input type="text" placeholder="Description" />
+                        <input type="text" placeholder="Link" name="linkVal"/>
+                        <input type="text" placeholder="Description" name="descriptionVal"/>
                         <button>Post</button>
                     </form>
                 </div>
