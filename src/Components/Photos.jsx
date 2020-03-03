@@ -1,21 +1,24 @@
 //import React, { Component } from 'react'  //No longer need {Component} as functional components are used instead
 import React from 'react'
 import PropTypes from 'prop-types'
+import {Link} from 'react-router-dom'
 
 
 function Photo(props){
     const post = props.post
 
     return <figure className="figure">
-    <img src={post.imageLink} alt={post.description}/>
+                 <Link to={`/single/${post.id}`}>
+                    <img src={post.imageLink} alt={post.description}/>
+                 </Link>
 
-    <figcaption><p>{post.description}</p></figcaption>
+                <figcaption><p>{post.description}</p></figcaption>
 
-    <div className="button-container">
-        <button onClick={()=>{props.onRemovePhoto(post)}}>
-            Remove
-        </button>
-    </div>
+                <div className="button-container">
+                    <button onClick={()=>{props.removePost(props.index)}}>
+                        Remove
+                    </button>
+                </div>
 </figure>
 }
 

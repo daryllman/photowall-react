@@ -2,8 +2,11 @@ import React, {Component} from 'react'
 import Title from './Title.jsx'
 import PhotoWall from './PhotoWall'
 import AddPhoto from './AddPhoto'
+import Single from './Single'
 import {Route} from 'react-router-dom'
 import {connect} from 'react-redux'
+import {removePost} from '../redux/actions'
+import {Link} from 'react-router-dom'
 
 
 
@@ -15,7 +18,6 @@ class Main extends Component{
         //properly binding context to removePhoto() function
         //so that context is correct
         // this.removePhoto = this.removePhoto.bind(this)
-
         console.log('constructor')
     }
 
@@ -48,24 +50,29 @@ class Main extends Component{
 
     render(){
         //console.log(this.props.posts)
-        return <div>
+        return (
+        <div>
+            <h1>
+                <Link to="/">Photowall</Link>
+            </h1>
             <Route exact path="/" render={()=>(
                         <div>
-                            <Title title = {'PhotoWall'}/>
-                            <PhotoWall posts={this.props.posts} />
+                            <PhotoWall {...this.props} />
                         </div>
             )}/>
 
-            {/* <Route exact path="/AddPhoto" render={({history})=>(
+            <Route exact path="/AddPhoto" render={({history})=>(
                         <div>
-                            <AddPhoto onAddPhoto={(addedPost)=>{
-                                this.addPhoto(addedPost)
-                                history.push('/')
-                            }}/>
+                            <AddPhoto {...this.props} onHistory={history}/>
                         </div>
-            )}/> */}
+            )}/>
+
+            <Route path="/single/:id" render={(params)=>(
+                <Single {...this.props} {...params}/>
+            )}/>
 
         </div>
+        )
     }
 }
 
