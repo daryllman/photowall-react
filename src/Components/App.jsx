@@ -6,7 +6,8 @@ import {withRouter} from 'react-router' //tiny thing that helps Main component t
 
 function mapStateToProps(state){
     return {
-        posts: state
+        posts: state, 
+        comments: state.comments
     }
 }
 

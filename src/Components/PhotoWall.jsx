@@ -8,7 +8,7 @@ function PhotoWall(props){
     return <div>
             <Link className="addIcon" to="/AddPhoto"/>
             <div className="photoGrid">
-                {props.posts
+                {props.posts.posts
                     .sort(function(x,y){
                         return y.id-x.id
                     })
