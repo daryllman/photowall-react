@@ -11,6 +11,13 @@ import {Link} from 'react-router-dom'
 
 
 class Main extends Component{
+    state={loading: true}
+    
+    componentDidMount(){
+        this.setState({loading: false})
+    }
+
+
     // we want to put posts array in state as we want it to update and change accordingly (ie. have states)
     constructor(){
         super() //so we can access this
@@ -68,7 +75,7 @@ class Main extends Component{
             )}/>
 
             <Route path="/single/:id" render={(params)=>(
-                <Single {...this.props} {...params}/>
+                <Single loading={this.state.loading} {...this.props} {...params}/>
             )}/>
 
         </div>
